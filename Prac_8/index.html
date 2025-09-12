@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="crudApp">
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS CRUD Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="angularCrud.js"></script>
+  </head>
+  <body ng-controller="myCtrl">
+    <h2>Student Management</h2>
+
+    <form ng-submit="saveRecord()">
+      <input
+        type="text"
+        ng-model="newStudent.name"
+        placeholder="Name"
+        required
+      />
+      <input
+        type="text"
+        ng-model="newStudent.address"
+        placeholder="Address"
+        required
+      />
+      <input
+        type="text"
+        ng-model="newStudent.dept"
+        placeholder="Department"
+        required
+      />
+      <button type="submit">{{ editingId === null ? 'Add' : 'Update' }}</button>
+      <button type="button" ng-click="reset()">Cancel</button>
+    </form>
+
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Dept</th>
+        <th>Action</th>
+      </tr>
+      <tr ng-repeat="s in students">
+        <td>{{s.name}}</td>
+        <td>{{s.address}}</td>
+        <td>{{s.dept}}</td>
+        <td>
+          <button ng-click="edit(s.id)">Edit</button>
+          <button ng-click="delete(s.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

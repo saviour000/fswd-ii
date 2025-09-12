@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>AngularJS Data Binding Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-controller="BindingController">
+    <h2>Angular JS Two-Way Binding</h2>
+
+    <h3>2. Two-way binding (MVC)</h3>
+    <label>Enter Your Name: </label>
+    <input type="text" ng-model="studentName" />
+    <p>Hello <b>{{studentName}}</b>, nice to meet you!</p>
+
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("BindingController", function ($scope) {
+        $scope.studentName = "tara";
+      });
+    </script>
+  </body>
+</html>

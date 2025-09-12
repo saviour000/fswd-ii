@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Multiple Animations Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+    <style>
+      .box {
+        background: #333;
+        color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: all linear 0.5s;
+        font-size: 16px;
+      }
+      .box.bigger {
+        font-size: 30px;
+      }
+      .box.light-theme {
+        background: #eee;
+        color: #333;
+      }
+
+      .animated-element {
+        background-color: green;
+        height: 50px;
+        width: 50px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+      .bounce {
+        animation: bounce 1s;
+      }
+      .spin {
+        animation: spin 1s;
+      }
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-50px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body ng-app="myApp" ng-controller="mainCtrl">
+    <div
+      class="box"
+      ng-class="{
+        'bigger': state.bigger,
+        'light-theme': state.lightTheme
+      }"
+    >
+      Animate me with ng-class!
+    </div>
+    <button ng-click="toggleBigger()">Toggle Bigger</button>
+    <button ng-click="toggleTheme()">Toggle Theme</button>
+
+    <div class="animated-element"></div>
+    <button ng-click="runBounceSpin()">Bounce, then Spin</button>
+
+    <script>
+      angular
+        .module("myApp", ["ngAnimate"])
+        .controller("mainCtrl", function ($scope, $animate) {
+          $scope.state = { bigger: false, lightTheme: false };
+
+          $scope.toggleBigger = function () {
+            $scope.state.bigger = !$scope.state.bigger;
+          };
+          $scope.toggleTheme = function () {
+            $scope.state.lightTheme = !$scope.state.lightTheme;
+          };
+          $scope.runBounceSpin = function () {
+            var elem = angular.element(
+              document.querySelector(".animated-element")
+            );
+            $animate
+              .addClass(elem, "bounce")
+              .then(function () {
+                return $animate.addClass(elem, "spin");
+              })
+              .then(function () {
+                $animate.removeClass(elem, "bounce spin");
+              });
+          };
+        });
+    </script>
+  </body>
+</html>

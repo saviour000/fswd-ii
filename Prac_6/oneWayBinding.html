@@ -1,0 +1,31 @@
+<!-- To implement Data binding using Angular JS -->
+<!DOCTYPE html>
+<html lang="en" ng-app="oneWayApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One-way Data Binding Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-controller="OneWayController">
+    <h2>AngularJS One-way Binding</h2>
+
+    <!-- Using Interpolation -->
+    <p>Student Name: {{student.name}}</p>
+    <p>Branch: {{student.branch}}</p>
+
+    <!-- Using ng-bind -->
+    <p ng-bind="student.email"></p>
+
+    <script>
+      var app = angular.module("oneWayApp", []);
+      app.controller("OneWayController", function ($scope) {
+        $scope.student = {
+          name: "John",
+          branch: "MCA",
+          email: "john@gmail.com",
+        };
+      });
+    </script>
+  </body>
+</html>
